@@ -1,0 +1,14 @@
+<h2>Welcome</h2>
+<div id="userInfo">Loading...</div>
+
+<script>
+  fetch('/api/auth/me', { credentials: 'include' })
+    .then(res => res.ok ? res.json() : Promise.reject('Unauthorized'))
+    .then(user => {
+      document.getElementById('userInfo').textContent = `Hello, ${user.username} (${user.email})`;
+    })
+    .catch(err => {
+      alert('Not logged in');
+      window.location.href = '/login';
+    });
+</script>
